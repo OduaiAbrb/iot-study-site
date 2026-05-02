@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IoT in Software Engineering — Interactive Study Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ── SIDEBAR NAV ────────────────────────────────────────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-icon">📡</span>
+    <span class="logo-text">IoT<span class="logo-accent">SE</span></span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#home"     class="nav-item active" data-chapter="home">🏠 Overview</a>
+    <a href="#ch1"      class="nav-item" data-chapter="ch1">01 · Introduction</a>
+    <a href="#ch2"      class="nav-item" data-chapter="ch2">02 · Architecture</a>
+    <a href="#ch3"      class="nav-item" data-chapter="ch3">03 · DevOps</a>
+    <a href="#ch4"      class="nav-item" data-chapter="ch4">04 · Software Design</a>
+    <a href="#ch6"      class="nav-item" data-chapter="ch6">06 · Data Visualization</a>
+    <a href="#ch7"      class="nav-item" data-chapter="ch7">07 · Data Management</a>
+    <a href="#ch8"      class="nav-item" data-chapter="ch8">08 · Security</a>
+    <a href="#ch9"      class="nav-item" data-chapter="ch9">09 · Testing</a>
+    <a href="#ch10"     class="nav-item" data-chapter="ch10">10 · Challenges</a>
+    <a href="#ch11"     class="nav-item" data-chapter="ch11">11 · Emerging Trends</a>
+    <a href="#ch12"     class="nav-item" data-chapter="ch12">12 · Future of IoT</a>
+    <a href="#quiz"     class="nav-item" data-chapter="quiz">🧠 Quiz</a>
+    <a href="#glossary" class="nav-item" data-chapter="glossary">📖 Glossary</a>
+  </nav>
+  <div class="sidebar-progress">
+    <div class="progress-label">Progress <span id="progress-pct">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+</aside>
+
+<!-- ── MOBILE HEADER ─────────────────────────────────────────── -->
+<header class="mobile-header">
+  <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+  <span class="mobile-title">IoT Study Guide</span>
+  <span class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</span>
+</header>
+
+<!-- ── MAIN CONTENT ──────────────────────────────────────────── -->
+<main class="main" id="main">
+
+  <!-- HERO / HOME -->
+  <section class="page active" id="home">
+    <div class="hero-bg">
+      <div class="hero-particles" id="particles"></div>
+      <div class="hero-content">
+        <div class="hero-badge">📡 Software Engineering · IoT</div>
+        <h1 class="hero-title">Internet of Things<br/><span class="gradient-text">in Software Engineering</span></h1>
+        <p class="hero-sub">A complete interactive study guide covering all 11 chapters — from IoT fundamentals to the future of connected systems.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="goTo('ch1')">Start Learning →</button>
+          <button class="btn-ghost" onclick="goTo('quiz')">Take a Quiz</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">11</span><span class="stat-label">Chapters</span></div>
+          <div class="stat"><span class="stat-num">60+</span><span class="stat-label">Concepts</span></div>
+          <div class="stat"><span class="stat-num">80+</span><span class="stat-label">Quiz Questions</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-grid section-pad">
+      <h2 class="section-title">All Chapters</h2>
+      <div class="cards-grid" id="chapter-cards"></div>
+    </div>
+  </section>
+
+  <!-- CH 1 – INTRODUCTION -->
+  <section class="page" id="ch1">
+    <div class="chapter-hero ch1-hero">
+      <div class="chapter-number">01</div>
+      <h1>Introduction to IoT in<br/>Software Engineering</h1>
+      <p class="chapter-tagline">Foundations of connected systems and software engineering principles applied to IoT.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-icon">🔌</div>
+          <h3>What is IoT?</h3>
+          <p>The Internet of Things connects physical devices, vehicles, appliances, and other objects embedded with sensors, software, and network connectivity to collect and exchange data.</p>
+          <div class="concept-tags"><span>Sensors</span><span>Connectivity</span><span>Data</span></div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">⚙️</div>
+          <h3>SE Principles in IoT</h3>
+          <p>Software engineering principles — modularity, abstraction, reliability, scalability — are critical in IoT systems due to their distributed, heterogeneous, and resource-constrained nature.</p>
+          <div class="concept-tags"><span>Modularity</span><span>Reliability</span><span>Scalability</span></div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🌍</div>
+          <h3>IoT Applications</h3>
+          <p>Smart homes, industrial automation (IIoT), healthcare monitoring, smart cities, agriculture, transportation, and environmental monitoring are core IoT domains.</p>
+          <div class="concept-tags"><span>Smart Home</span><span>IIoT</span><span>Healthcare</span></div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">📊</div>
+          <h3>Key Characteristics</h3>
+          <ul class="feature-list">
+            <li>Heterogeneity — diverse hardware/software</li>
+            <li>Resource constraints — limited CPU, memory, battery</li>
+            <li>Real-time operation requirements</li>
+            <li>Massive scale — billions of devices</li>
+            <li>Interoperability — cross-platform communication</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+        <h3>IoT Ecosystem Overview</h3>
+        <div class="iot-diagram">
+          <div class="diag-layer diag-devices">
+            <div class="diag-label">Device Layer</div>
+            <div class="diag-items">
+              <div class="diag-item">🌡️ Sensor</div>
+              <div class="diag-item">📷 Camera</div>
+              <div class="diag-item">⚡ Actuator</div>
+              <div class="diag-item">📡 Gateway</div>
+            </div>
+          </div>
+          <div class="diag-arrow">↓ Data Flow ↓</div>
+          <div class="diag-layer diag-network">
+            <div class="diag-label">Network Layer</div>
+            <div class="diag-items">
+              <div class="diag-item">📶 WiFi/BLE</div>
+              <div class="diag-item">📱 Cellular</div>
+              <div class="diag-item">🔗 LPWAN</div>
+            </div>
+          </div>
+          <div class="diag-arrow">↓ Processing ↓</div>
+          <div class="diag-layer diag-cloud">
+            <div class="diag-label">Application Layer</div>
+            <div class="diag-items">
+              <div class="diag-item">☁️ Cloud</div>
+              <div class="diag-item">📊 Analytics</div>
+              <div class="diag-item">📱 App</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-box">
+        <h3>IoT Evolution Timeline</h3>
+        <div class="timeline">
+          <div class="tl-item"><span class="tl-year">1999</span><span class="tl-event">Term "Internet of Things" coined by Kevin Ashton</span></div>
+          <div class="tl-item"><span class="tl-year">2008</span><span class="tl-event">Number of connected devices exceeds world population</span></div>
+          <div class="tl-item"><span class="tl-year">2011</span><span class="tl-event">IPv6 launch enables trillions of device addresses</span></div>
+          <div class="tl-item"><span class="tl-year">2020</span><span class="tl-event">~30 billion connected IoT devices worldwide</span></div>
+          <div class="tl-item"><span class="tl-year">2030</span><span class="tl-event">Projected 75+ billion connected devices</span></div>
+        </div>
+      </div>
+
+      <div class="key-terms">
+        <h3>Key Terms</h3>
+        <div class="terms-grid">
+          <div class="term"><strong>Thing</strong> — Any physical object embedded with electronics to communicate over a network.</div>
+          <div class="term"><strong>Sensor</strong> — Detects physical phenomena (temperature, motion, light) and converts to digital signals.</div>
+          <div class="term"><strong>Actuator</strong> — Responds to commands by affecting the physical environment (motor, valve, relay).</div>
+          <div class="term"><strong>Gateway</strong> — Bridges IoT devices to the internet, handles protocol translation and data aggregation.</div>
+          <div class="term"><strong>Edge Computing</strong> — Processing data near the source rather than sending everything to the cloud.</div>
+          <div class="term"><strong>MQTT</strong> — Lightweight messaging protocol widely used in IoT (publish/subscribe model).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 2 – ARCHITECTURE -->
+  <section class="page" id="ch2">
+    <div class="chapter-hero ch2-hero">
+      <div class="chapter-number">02</div>
+      <h1>IoT Architecture</h1>
+      <p class="chapter-tagline">Layered models, reference architectures, and design patterns for connected systems.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="arch-tabs">
+        <button class="tab-btn active" data-tab="three-layer">3-Layer Model</button>
+        <button class="tab-btn" data-tab="five-layer">5-Layer Model</button>
+        <button class="tab-btn" data-tab="fog">Fog/Edge</button>
+      </div>
+
+      <div class="tab-content active" id="three-layer">
+        <div class="arch-layers">
+          <div class="arch-layer layer-app"><span>Application Layer</span><small>User interfaces, analytics, business logic</small></div>
+          <div class="arch-layer layer-net"><span>Network Layer</span><small>Data transmission, routing, protocols</small></div>
+          <div class="arch-layer layer-perc"><span>Perception Layer</span><small>Sensors, actuators, physical devices</small></div>
+        </div>
+      </div>
+      <div class="tab-content" id="five-layer">
+        <div class="arch-layers">
+          <div class="arch-layer layer-app"><span>Business Layer</span><small>Business models, graphs, flowcharts</small></div>
+          <div class="arch-layer layer-net"><span>Processing Layer</span><small>Cloud, databases, big data, analytics</small></div>
+          <div class="arch-layer layer-mid"><span>Middleware Layer</span><small>Service management, data handling</small></div>
+          <div class="arch-layer layer-net"><span>Network Layer</span><small>Wi-Fi, Bluetooth, LTE, ZigBee</small></div>
+          <div class="arch-layer layer-perc"><span>Perception Layer</span><small>Physical sensors and actuators</small></div>
+        </div>
+      </div>
+      <div class="tab-content" id="fog">
+        <div class="concept-grid">
+          <div class="concept-card"><div class="concept-icon">🌫️</div><h3>Fog Computing</h3><p>Extends cloud computing to the edge of the network, reducing latency by processing data closer to IoT devices. Ideal for time-sensitive applications.</p></div>
+          <div class="concept-card"><div class="concept-icon">⚡</div><h3>Edge Computing</h3><p>Processing occurs on or near the device itself. Minimizes bandwidth usage and enables offline operation.</p></div>
+          <div class="concept-card"><div class="concept-icon">☁️</div><h3>Cloud Computing</h3><p>Centralized processing and storage for large-scale analytics, ML training, and long-term data retention.</p></div>
+          <div class="concept-card"><div class="concept-icon">🔄</div><h3>Hybrid Model</h3><p>Real-world deployments combine edge + fog + cloud for optimal performance, cost, and latency trade-offs.</p></div>
+        </div>
+      </div>
+
+      <div class="protocol-table-wrap">
+        <h3>IoT Communication Protocols</h3>
+        <table class="proto-table">
+          <thead><tr><th>Protocol</th><th>Range</th><th>Power</th><th>Use Case</th></tr></thead>
+          <tbody>
+            <tr><td>MQTT</td><td>Internet</td><td>Low</td><td>Remote sensor telemetry</td></tr>
+            <tr><td>CoAP</td><td>Internet</td><td>Very Low</td><td>Constrained devices, REST-like</td></tr>
+            <tr><td>Zigbee</td><td>10–100m</td><td>Very Low</td><td>Smart home mesh networks</td></tr>
+            <tr><td>Z-Wave</td><td>30m</td><td>Low</td><td>Home automation</td></tr>
+            <tr><td>LoRaWAN</td><td>2–15km</td><td>Ultralow</td><td>Smart city, agriculture</td></tr>
+            <tr><td>NB-IoT</td><td>Cellular</td><td>Low</td><td>Utility metering, tracking</td></tr>
+            <tr><td>BLE</td><td>10–100m</td><td>Low</td><td>Wearables, beacons</td></tr>
+            <tr><td>WiFi 6</td><td>100m</td><td>Medium</td><td>High-bandwidth IoT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 3 – DEVOPS -->
+  <section class="page" id="ch3">
+    <div class="chapter-hero ch3-hero">
+      <div class="chapter-number">03</div>
+      <h1>DevOps for IoT</h1>
+      <p class="chapter-tagline">Continuous integration, delivery, and deployment pipelines for connected devices.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="pipeline-viz">
+        <h3>IoT DevOps Pipeline</h3>
+        <div class="pipeline">
+          <div class="pipe-stage"><div class="pipe-icon">📝</div><div class="pipe-label">Plan</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-icon">💻</div><div class="pipe-label">Code</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-icon">🔨</div><div class="pipe-label">Build</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-icon">🧪</div><div class="pipe-label">Test</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-icon">📦</div><div class="pipe-label">Release</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-icon">🚀</div><div class="pipe-label">Deploy</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage"><div class="pipe-icon">📊</div><div class="pipe-label">Monitor</div></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-stage active"><div class="pipe-icon">🔁</div><div class="pipe-label">Operate</div></div>
+        </div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">🔄</div><h3>CI/CD for IoT</h3><p>Automated pipelines build firmware, run hardware-in-the-loop tests, and push OTA (over-the-air) updates to deployed devices — critical for fleet management.</p><div class="concept-tags"><span>CI</span><span>CD</span><span>OTA</span></div></div>
+        <div class="concept-card"><div class="concept-icon">📡</div><h3>OTA Updates</h3><p>Over-the-air firmware updates let you patch security vulnerabilities and add features without physical access. Requires rollback capabilities and delta updates for bandwidth efficiency.</p><div class="concept-tags"><span>Firmware</span><span>Rollback</span><span>Delta</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🐳</div><h3>Containerization</h3><p>Docker and Kubernetes are increasingly used for IoT edge deployments, enabling consistent environments across heterogeneous hardware via container runtimes like containerd.</p><div class="concept-tags"><span>Docker</span><span>K8s</span><span>Edge</span></div></div>
+        <div class="concept-card"><div class="concept-icon">📈</div><h3>Infrastructure as Code</h3><p>Terraform, Ansible, and Pulumi manage IoT infrastructure declaratively — provisioning cloud services, device registries, and messaging brokers reproducibly.</p><div class="concept-tags"><span>Terraform</span><span>Ansible</span><span>IaC</span></div></div>
+        <div class="concept-card"><div class="concept-icon">⚠️</div><h3>IoT-Specific Challenges</h3><ul class="feature-list"><li>Heterogeneous hardware/OS environments</li><li>Intermittent connectivity during updates</li><li>Resource-constrained devices</li><li>Safety-critical update requirements</li><li>Large device fleet management</li></ul></div>
+        <div class="concept-card"><div class="concept-icon">🔧</div><h3>DevOps Tools</h3><ul class="feature-list"><li><strong>Azure IoT Hub</strong> — device management</li><li><strong>AWS IoT Greengrass</strong> — edge runtime</li><li><strong>Balena</strong> — container-based OTA</li><li><strong>Mender</strong> — open-source OTA</li><li><strong>GitLab CI</strong> — pipeline automation</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 4 – SOFTWARE DESIGN -->
+  <section class="page" id="ch4">
+    <div class="chapter-hero ch4-hero">
+      <div class="chapter-number">04</div>
+      <h1>Software Design for IoT</h1>
+      <p class="chapter-tagline">Design patterns, architectural styles, and best practices for IoT software.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">🧩</div><h3>Event-Driven Architecture</h3><p>IoT systems are inherently event-driven. Sensors emit events; software reacts. Message brokers (MQTT, Kafka) decouple producers from consumers enabling scalable, loosely-coupled designs.</p><div class="concept-tags"><span>Events</span><span>MQTT</span><span>Kafka</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🏗️</div><h3>Microservices for IoT</h3><p>Each IoT function (data ingestion, processing, alerting, visualization) runs as an independent service. Enables independent deployment, fault isolation, and technology diversity.</p><div class="concept-tags"><span>Microservices</span><span>API</span><span>REST</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🔁</div><h3>Reactive Systems</h3><p>IoT systems must be responsive, resilient, elastic, and message-driven — the Reactive Manifesto principles. Non-blocking I/O and backpressure handling are essential.</p><div class="concept-tags"><span>Reactive</span><span>Async</span><span>Resilient</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🌊</div><h3>Data Stream Processing</h3><p>Apache Kafka Streams, Flink, and Spark Streaming process high-velocity IoT data in motion. Windowing, aggregations, and CEP (complex event processing) extract insights in real time.</p><div class="concept-tags"><span>Kafka</span><span>Flink</span><span>CEP</span></div></div>
+      </div>
+      <div class="pattern-cards">
+        <h3>IoT Design Patterns</h3>
+        <div class="pattern-grid">
+          <div class="pattern"><span class="pat-name">Gateway Pattern</span><p>Single entry point aggregates device data, handles protocol translation, provides security.</p></div>
+          <div class="pattern"><span class="pat-name">Device Twin</span><p>Cloud-side representation of device state; enables sync between actual device and desired state.</p></div>
+          <div class="pattern"><span class="pat-name">Command Pattern</span><p>Encapsulates actuator commands as objects; supports queuing, logging, and rollback.</p></div>
+          <div class="pattern"><span class="pat-name">Observer Pattern</span><p>Publish/subscribe model; devices publish data, services subscribe to specific topics.</p></div>
+          <div class="pattern"><span class="pat-name">Heartbeat Pattern</span><p>Devices send periodic signals; absence triggers alerts for device health monitoring.</p></div>
+          <div class="pattern"><span class="pat-name">Store &amp; Forward</span><p>Buffer data locally when offline; flush to cloud on reconnection — handles intermittency.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 6 – DATA VISUALIZATION -->
+  <section class="page" id="ch6">
+    <div class="chapter-hero ch6-hero">
+      <div class="chapter-number">06</div>
+      <h1>IoT Data Visualization</h1>
+      <p class="chapter-tagline">Turning streams of sensor data into actionable insights through effective visual design.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">📈</div><h3>Time-Series Charts</h3><p>Most IoT data is time-series. Line charts, area charts, and candlestick charts show trends and anomalies in sensor readings over time.</p></div>
+        <div class="concept-card"><div class="concept-icon">🗺️</div><h3>Geospatial Maps</h3><p>Location-tagged devices plotted on maps reveal spatial patterns — fleet tracking, environmental monitoring, smart city deployments.</p></div>
+        <div class="concept-card"><div class="concept-icon">🎛️</div><h3>Dashboards</h3><p>Grafana, Kibana, and custom dashboards aggregate KPIs, alerts, and real-time streams into operator-facing views.</p></div>
+        <div class="concept-card"><div class="concept-icon">🔥</div><h3>Heatmaps</h3><p>Visualize density and intensity across 2D space — foot traffic, temperature distribution, network signal strength.</p></div>
+      </div>
+
+      <div class="live-demo-box">
+        <h3>🔴 Live Sensor Simulation</h3>
+        <div class="sensor-grid">
+          <div class="sensor-widget" id="temp-widget">
+            <div class="sensor-label">Temperature</div>
+            <div class="sensor-value" id="temp-val">24.3°C</div>
+            <div class="sensor-bar-wrap"><div class="sensor-bar" id="temp-bar" style="width:48%"></div></div>
+          </div>
+          <div class="sensor-widget" id="humidity-widget">
+            <div class="sensor-label">Humidity</div>
+            <div class="sensor-value" id="humidity-val">62%</div>
+            <div class="sensor-bar-wrap"><div class="sensor-bar" id="humidity-bar" style="width:62%"></div></div>
+          </div>
+          <div class="sensor-widget" id="co2-widget">
+            <div class="sensor-label">CO₂ ppm</div>
+            <div class="sensor-value" id="co2-val">412</div>
+            <div class="sensor-bar-wrap"><div class="sensor-bar" id="co2-bar" style="width:41%"></div></div>
+          </div>
+          <div class="sensor-widget" id="pressure-widget">
+            <div class="sensor-label">Pressure hPa</div>
+            <div class="sensor-value" id="pressure-val">1013</div>
+            <div class="sensor-bar-wrap"><div class="sensor-bar" id="pressure-bar" style="width:55%"></div></div>
+          </div>
+        </div>
+        <canvas id="sensorChart" height="120"></canvas>
+        <p class="demo-note">Simulating real-time sensor readings every 2 seconds</p>
+      </div>
+
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">🛠️</div><h3>Visualization Tools</h3><ul class="feature-list"><li><strong>Grafana</strong> — open-source dashboards</li><li><strong>Power BI</strong> — enterprise analytics</li><li><strong>Tableau</strong> — drag-drop visual analytics</li><li><strong>D3.js</strong> — custom web visualizations</li><li><strong>Node-RED</strong> — flow-based IoT dashboards</li></ul></div>
+        <div class="concept-card"><div class="concept-icon">✅</div><h3>Best Practices</h3><ul class="feature-list"><li>Minimize latency — show fresh data</li><li>Use consistent color scales</li><li>Design for mobile/tablet operators</li><li>Add alerting thresholds visually</li><li>Support drill-down for anomalies</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 7 – DATA MANAGEMENT -->
+  <section class="page" id="ch7">
+    <div class="chapter-hero ch7-hero">
+      <div class="chapter-number">07</div>
+      <h1>Data Management for IoT</h1>
+      <p class="chapter-tagline">Storage, processing, and governance of massive IoT data streams.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">⏱️</div><h3>Time-Series Databases</h3><p>InfluxDB, TimescaleDB, and Apache Cassandra are optimized for high write throughput and time-range queries on sensor data with automatic retention policies.</p><div class="concept-tags"><span>InfluxDB</span><span>TimescaleDB</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🌊</div><h3>Stream Processing</h3><p>Apache Kafka enables publish-subscribe at massive scale. Kafka Streams, Flink, and Spark Streaming provide stateful processing, windowing, and joins on live data.</p><div class="concept-tags"><span>Kafka</span><span>Flink</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🏞️</div><h3>Data Lakes</h3><p>Raw IoT data stored in object storage (S3, Azure Data Lake) for long-term retention, batch analytics, and ML model training. Schema-on-read provides flexibility.</p><div class="concept-tags"><span>S3</span><span>Parquet</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🔒</div><h3>Data Governance</h3><p>GDPR and privacy regulations require data minimization, consent tracking, anonymization, and right-to-erasure — challenging in distributed IoT systems at scale.</p><div class="concept-tags"><span>GDPR</span><span>Privacy</span></div></div>
+        <div class="concept-card"><div class="concept-icon">📉</div><h3>Data Reduction</h3><p>Sampling, compression, and aggregation reduce bandwidth and storage costs. Edge preprocessing filters noise before data leaves the device.</p></div>
+        <div class="concept-card"><div class="concept-icon">🗄️</div><h3>Database Selection</h3>
+          <table class="mini-table">
+            <tr><td>Relational</td><td>Structured, transactional</td></tr>
+            <tr><td>NoSQL</td><td>Flexible schema, scale-out</td></tr>
+            <tr><td>Time-series</td><td>Sensor readings, metrics</td></tr>
+            <tr><td>Graph</td><td>Device relationships</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 8 – SECURITY -->
+  <section class="page" id="ch8">
+    <div class="chapter-hero ch8-hero">
+      <div class="chapter-number">08</div>
+      <h1>Security Engineering for IoT</h1>
+      <p class="chapter-tagline">Protecting connected devices, data, and infrastructure from evolving threats.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="threat-model">
+        <h3>IoT Threat Model</h3>
+        <div class="threat-grid">
+          <div class="threat-item threat-high"><span class="threat-level">HIGH</span><span class="threat-name">Device Hijacking</span><p>Attackers take control of IoT devices to launch DDoS, mine crypto, or pivot into corporate networks.</p></div>
+          <div class="threat-item threat-high"><span class="threat-level">HIGH</span><span class="threat-name">Insecure Firmware</span><p>Hardcoded credentials, unencrypted storage, and unsigned updates enable firmware-level attacks.</p></div>
+          <div class="threat-item threat-med"><span class="threat-level">MED</span><span class="threat-name">Data Interception</span><p>Unencrypted MQTT/HTTP traffic intercepted via man-in-the-middle attacks on local networks.</p></div>
+          <div class="threat-item threat-med"><span class="threat-level">MED</span><span class="threat-name">Physical Tampering</span><p>Physical access to devices allows JTAG/UART debugging, flash extraction, and hardware manipulation.</p></div>
+          <div class="threat-item threat-low"><span class="threat-level">LOW</span><span class="threat-name">API Abuse</span><p>Poorly authenticated cloud APIs allow unauthorized device control or data exfiltration.</p></div>
+        </div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">🔑</div><h3>Authentication</h3><p>Device identity via X.509 certificates, TPM chips, or pre-shared keys. Mutual TLS ensures both device and server authenticate each other.</p><div class="concept-tags"><span>mTLS</span><span>X.509</span><span>TPM</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🔐</div><h3>Encryption</h3><p>TLS 1.3 for transport, AES-256 for data at rest. Lightweight alternatives (DTLS, OSCORE) designed for constrained devices.</p><div class="concept-tags"><span>TLS</span><span>AES</span><span>DTLS</span></div></div>
+        <div class="concept-card"><div class="concept-icon">🛡️</div><h3>Secure Boot</h3><p>Cryptographically verified boot chain prevents running tampered firmware. Root of trust established in hardware (HSM, TPM).</p></div>
+        <div class="concept-card"><div class="concept-icon">🔍</div><h3>Network Segmentation</h3><p>IoT devices isolated on separate VLANs/subnets. Zero-trust architecture requires authentication for every connection.</p></div>
+        <div class="concept-card"><div class="concept-icon">📋</div><h3>Security Standards</h3><ul class="feature-list"><li>NIST SP 800-213 — IoT device cybersecurity</li><li>ETSI EN 303 645 — baseline IoT security</li><li>IEC 62443 — industrial control system security</li><li>OWASP IoT Top 10</li></ul></div>
+        <div class="concept-card"><div class="concept-icon">🚨</div><h3>OWASP IoT Top 10</h3><ul class="feature-list"><li>Weak/guessable/hardcoded passwords</li><li>Insecure network services</li><li>Insecure ecosystem interfaces</li><li>Lack of secure update mechanism</li><li>Use of insecure/outdated components</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 9 – TESTING -->
+  <section class="page" id="ch9">
+    <div class="chapter-hero ch9-hero">
+      <div class="chapter-number">09</div>
+      <h1>IoT Software Testing &amp; Maintenance</h1>
+      <p class="chapter-tagline">Ensuring reliability, safety, and correctness across heterogeneous IoT deployments.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="test-pyramid">
+        <h3>IoT Testing Pyramid</h3>
+        <div class="pyramid">
+          <div class="pyr-layer pyr-e2e"><span>E2E Tests</span><small>Full system integration</small></div>
+          <div class="pyr-layer pyr-int"><span>Integration Tests</span><small>Device–Cloud, API, Protocol</small></div>
+          <div class="pyr-layer pyr-hw"><span>Hardware-in-Loop</span><small>Real device + simulated environment</small></div>
+          <div class="pyr-layer pyr-unit"><span>Unit Tests</span><small>Firmware logic, drivers, parsers</small></div>
+        </div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">🔬</div><h3>Hardware-in-the-Loop</h3><p>Real hardware connected to a simulated environment. Validates firmware against realistic sensor signals and actuator responses without full system deployment.</p></div>
+        <div class="concept-card"><div class="concept-icon">🤖</div><h3>Simulation &amp; Emulation</h3><p>QEMU, Renode, and custom simulators emulate target hardware for CI pipelines. AWS IoT Device Simulator generates virtual device fleets.</p></div>
+        <div class="concept-card"><div class="concept-icon">💥</div><h3>Chaos Engineering</h3><p>Deliberately inject failures — network partitions, power loss, sensor drift — to validate system resilience and recovery mechanisms.</p></div>
+        <div class="concept-card"><div class="concept-icon">⚡</div><h3>Performance Testing</h3><p>Validate message throughput, latency under load, memory footprint on constrained devices, and battery life under various workloads.</p></div>
+        <div class="concept-card"><div class="concept-icon">🔒</div><h3>Security Testing</h3><p>Firmware analysis, fuzzing communication protocols, penetration testing gateways, and scanning for hardcoded secrets in firmware images.</p></div>
+        <div class="concept-card"><div class="concept-icon">🔧</div><h3>Predictive Maintenance</h3><p>ML models on sensor streams predict device failures before they occur. Anomaly detection baselines normal behavior and alerts on deviations.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 10 – CHALLENGES -->
+  <section class="page" id="ch10">
+    <div class="chapter-hero ch10-hero">
+      <div class="chapter-number">10</div>
+      <h1>Challenges in IoT Development</h1>
+      <p class="chapter-tagline">Technical, organizational, and societal hurdles facing IoT at scale.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="challenge-wheel">
+        <h3>Core IoT Challenges</h3>
+        <div class="challenges-ring">
+          <div class="chal-item"><div class="chal-icon">⚡</div><h4>Power Management</h4><p>Battery-powered devices must minimize consumption. Duty cycling, sleep modes, and energy harvesting extend operational life.</p></div>
+          <div class="chal-item"><div class="chal-icon">📶</div><h4>Connectivity</h4><p>Intermittent networks, protocol diversity, and range limitations require robust offline-first design and adaptive communication strategies.</p></div>
+          <div class="chal-item"><div class="chal-icon">🔗</div><h4>Interoperability</h4><p>Thousands of vendors, protocols, and data formats. Standards like Matter, FIWARE, and W3C WoT aim to unify the ecosystem.</p></div>
+          <div class="chal-item"><div class="chal-icon">📈</div><h4>Scalability</h4><p>Managing millions of devices, processing billions of events per day, and maintaining low latency requires cloud-native architectures.</p></div>
+          <div class="chal-item"><div class="chal-icon">🔒</div><h4>Security &amp; Privacy</h4><p>Massive attack surface across heterogeneous devices. Data privacy regulations add compliance complexity.</p></div>
+          <div class="chal-item"><div class="chal-icon">🏭</div><h4>Lifecycle Management</h4><p>Devices deployed for 10–20 years require long-term software support, decommissioning strategies, and sustainable hardware.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 11 – EMERGING TRENDS -->
+  <section class="page" id="ch11">
+    <div class="chapter-hero ch11-hero">
+      <div class="chapter-number">11</div>
+      <h1>Emerging Trends in IoT</h1>
+      <p class="chapter-tagline">AI at the edge, digital twins, 5G integration, and the next wave of connected systems.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="trend-cards">
+        <div class="trend-card"><div class="trend-badge trend-hot">🔥 Hot</div><h3>TinyML / Edge AI</h3><p>Running ML inference directly on microcontrollers (Cortex-M, RISC-V). TensorFlow Lite Micro and Edge Impulse enable keyword detection, anomaly detection, and image classification with milliwatts of power.</p><div class="concept-tags"><span>TensorFlow Lite</span><span>Edge Impulse</span><span>MCU</span></div></div>
+        <div class="trend-card"><div class="trend-badge trend-hot">🔥 Hot</div><h3>Digital Twins</h3><p>A real-time virtual replica of a physical asset. Azure Digital Twins, AWS IoT TwinMaker, and NVIDIA Omniverse enable simulation, predictive maintenance, and what-if analysis at scale.</p><div class="concept-tags"><span>Azure DT</span><span>Simulation</span><span>Predictive</span></div></div>
+        <div class="trend-card"><div class="trend-badge trend-grow">📈 Growing</div><h3>5G &amp; Private Networks</h3><p>5G's ultra-low latency (1ms), massive device density (1M/km²), and network slicing enable new IoT use cases: autonomous vehicles, remote surgery, industrial robotics.</p><div class="concept-tags"><span>5G</span><span>URLLC</span><span>mMTC</span></div></div>
+        <div class="trend-card"><div class="trend-badge trend-grow">📈 Growing</div><h3>Federated Learning</h3><p>Train ML models across distributed IoT devices without sharing raw data. Preserves privacy while improving model accuracy — critical for healthcare and industrial IoT.</p><div class="concept-tags"><span>Privacy</span><span>Distributed ML</span></div></div>
+        <div class="trend-card"><div class="trend-badge trend-emerg">🌱 Emerging</div><h3>Matter Standard</h3><p>Unified smart home protocol backed by Apple, Google, Amazon, and Samsung. IP-based, thread-enabled, built on proven internet standards for seamless interoperability.</p></div>
+        <div class="trend-card"><div class="trend-badge trend-emerg">🌱 Emerging</div><h3>Neuromorphic Computing</h3><p>Brain-inspired chips (Intel Loihi, IBM TrueNorth) enable ultra-efficient event-driven sensing and inference, consuming 1000× less power than conventional processors.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 12 – FUTURE -->
+  <section class="page" id="ch12">
+    <div class="chapter-hero ch12-hero">
+      <div class="chapter-number">12</div>
+      <h1>The Future of IoT</h1>
+      <p class="chapter-tagline">Trillion-device ecosystems, autonomous systems, and the convergence of physical and digital worlds.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="future-timeline">
+        <h3>IoT Roadmap</h3>
+        <div class="future-items">
+          <div class="future-item"><span class="fy">2025</span><h4>Ambient IoT</h4><p>Passive devices powered by ambient energy (RF, light, vibration). No batteries — truly disposable sensors integrated into everyday objects.</p></div>
+          <div class="future-item"><span class="fy">2027</span><h4>Autonomous Edge</h4><p>Edge nodes run full AI autonomy loops — sense, reason, act — without cloud dependency. Real-time decision making for safety-critical systems.</p></div>
+          <div class="future-item"><span class="fy">2030</span><h4>Trillion-Device Scale</h4><p>75+ billion connected devices. New addressing schemes, ultra-dense networks, and AI-driven orchestration manage unprecedented scale.</p></div>
+          <div class="future-item"><span class="fy">2035</span><h4>Cognitive IoT</h4><p>IoT systems learn and adapt in real time. Swarm intelligence, collective behavior, and self-organizing networks emerge from device-to-device collaboration.</p></div>
+        </div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="concept-icon">🌐</div><h3>Web3 &amp; IoT</h3><p>Blockchain-based identity, decentralized data marketplaces, and smart contracts enable trustless machine-to-machine transactions and data monetization.</p></div>
+        <div class="concept-card"><div class="concept-icon">🧬</div><h3>BioIoT</h3><p>Implantable devices, smart pills, and biosensors enable continuous health monitoring, drug delivery, and neural interfaces — blurring biology and technology.</p></div>
+        <div class="concept-card"><div class="concept-icon">🤝</div><h3>Human-IoT Collaboration</h3><p>AR/VR interfaces let humans interact with IoT environments. Digital twins provide immersive management of physical infrastructure.</p></div>
+        <div class="concept-card"><div class="concept-icon">♻️</div><h3>Sustainable IoT</h3><p>Energy harvesting, circular economy hardware design, and carbon-aware computing reduce the environmental footprint of trillion-device deployments.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="page" id="quiz">
+    <div class="chapter-hero quiz-hero">
+      <div class="chapter-number">🧠</div>
+      <h1>Knowledge Quiz</h1>
+      <p class="chapter-tagline">Test your understanding across all IoT chapters.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="quiz-container" id="quiz-container"></div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="page" id="glossary">
+    <div class="chapter-hero glossary-hero">
+      <div class="chapter-number">📖</div>
+      <h1>IoT Glossary</h1>
+      <p class="chapter-tagline">Quick reference for all key terms and acronyms.</p>
+    </div>
+    <div class="chapter-body">
+      <div class="glossary-search-wrap">
+        <input type="text" id="glossary-search" placeholder="Search terms..." class="glossary-search" />
+      </div>
+      <div class="glossary-grid" id="glossary-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
