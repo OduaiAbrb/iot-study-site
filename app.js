@@ -15,6 +15,10 @@ const CHAPTERS = [
   { id:'ch10', num:'10', title:'IoT Challenges',            desc:'Power management, connectivity, interoperability, scalability, and lifecycle management.' },
   { id:'ch11', num:'11', title:'Emerging Trends',           desc:'TinyML, digital twins, 5G, federated learning, Matter standard, neuromorphic chips.' },
   { id:'ch12', num:'12', title:'Future of IoT',             desc:'Ambient IoT, autonomous edge, trillion-device scale, BioIoT, and sustainable computing.' },
+  { id:'ch13', num:'13', title:'Protocol Decision Lab',     desc:'Interactive scoring for MQTT, CoAP, LoRaWAN, BLE, Zigbee, NB-IoT, and HTTP tradeoffs.' },
+  { id:'ch14', num:'14', title:'Threat Modeling Workshop',  desc:'Build security controls from assets, attack surfaces, and IoT-specific risks.' },
+  { id:'ch15', num:'15', title:'Edge Resource Budget',      desc:'Estimate bandwidth and battery impact from sampling rate, payload size, and sleep ratio.' },
+  { id:'ch16', num:'16', title:'Fleet Operations Simulator', desc:'Practice canary rollout, offline-device, and rollback decisions for live IoT fleets.' },
   { id:'quiz',     skip: true },
   { id:'glossary', skip: true },
 ];
@@ -618,8 +622,125 @@ function shuffle(arr) {
   return a;
 }
 
+function injectAdvancedLabs() {
+  const nav = document.querySelector('.sidebar-nav');
+  const quizLink = document.querySelector('[data-chapter="quiz"]');
+  ['ch13', 'ch14', 'ch15', 'ch16'].forEach(id => {
+    if (!document.querySelector(`[data-chapter="${id}"]`)) {
+      const chapter = CHAPTERS.find(c => c.id === id);
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.className = 'nav-item';
+      link.dataset.chapter = id;
+      link.textContent = `${chapter.num} · ${chapter.title}`;
+      nav.insertBefore(link, quizLink);
+    }
+  });
+
+  const main = document.getElementById('main');
+  const quizPage = document.getElementById('quiz');
+  if (document.getElementById('ch13')) return;
+
+  main.insertBefore(htmlToElement(`<section class="page" id="ch13"><div class="chapter-hero ch2-hero"><div class="chapter-number">13</div><h1>Protocol Decision Lab</h1><p class="chapter-tagline">Compare connectivity protocols against realistic product constraints.</p></div><div class="chapter-body"><div class="lab-grid"><div class="lab-panel"><h3>Scenario Controls</h3><label class="range-row">Range requirement <input id="iot-range" type="range" min="1" max="5" value="3"><span id="iot-range-label"></span></label><label class="range-row">Battery priority <input id="iot-battery" type="range" min="1" max="5" value="4"><span id="iot-battery-label"></span></label><label class="range-row">Message frequency <input id="iot-frequency" type="range" min="1" max="5" value="3"><span id="iot-frequency-label"></span></label><label class="range-row">Payload size <input id="iot-payload" type="range" min="1" max="5" value="2"><span id="iot-payload-label"></span></label><button class="btn-primary mt-16" onclick="scoreProtocols()">Score Protocols</button></div><div class="lab-panel"><h3>Fit Ranking</h3><div id="protocol-results" class="rank-list"></div></div></div><div class="concept-grid mt-24"><div class="concept-card"><h3>MQTT</h3><p>Best for cloud telemetry and pub/sub fan-out. Great default when a broker is acceptable.</p></div><div class="concept-card"><h3>CoAP</h3><p>UDP-based REST style for constrained devices and smaller request/response payloads.</p></div><div class="concept-card"><h3>LoRaWAN</h3><p>Excellent range and battery life with low bandwidth and higher latency.</p></div><div class="concept-card"><h3>BLE / Zigbee</h3><p>Strong local-network choices when a gateway can bridge devices to the cloud.</p></div></div></div></section>`), quizPage);
+  main.insertBefore(htmlToElement(`<section class="page" id="ch14"><div class="chapter-hero ch8-hero"><div class="chapter-number">14</div><h1>Threat Modeling Workshop</h1><p class="chapter-tagline">Select assets and generate an IoT security checklist.</p></div><div class="chapter-body"><div class="lab-grid"><div class="lab-panel"><h3>System Assets</h3><label class="check-row"><input type="checkbox" class="threat-input" value="device" checked> Device firmware and identity</label><label class="check-row"><input type="checkbox" class="threat-input" value="gateway" checked> Local gateway</label><label class="check-row"><input type="checkbox" class="threat-input" value="cloud" checked> Cloud API and dashboard</label><label class="check-row"><input type="checkbox" class="threat-input" value="ota"> OTA update pipeline</label><label class="check-row"><input type="checkbox" class="threat-input" value="privacy"> Personal or location data</label><button class="btn-primary mt-16" onclick="buildThreatModel()">Build Checklist</button></div><div class="lab-panel"><h3>Generated Controls</h3><div id="threat-results" class="checklist-output"></div></div></div></div></section>`), quizPage);
+  main.insertBefore(htmlToElement(`<section class="page" id="ch15"><div class="chapter-hero ch10-hero"><div class="chapter-number">15</div><h1>Edge Resource Budget</h1><p class="chapter-tagline">Estimate battery and bandwidth pressure from device behavior.</p></div><div class="chapter-body"><div class="lab-grid"><div class="lab-panel"><h3>Budget Inputs</h3><label class="range-row">Samples per minute <input id="budget-samples" type="range" min="1" max="60" value="12"><span id="budget-samples-label"></span></label><label class="range-row">Payload bytes <input id="budget-payload" type="range" min="16" max="1024" value="128"><span id="budget-payload-label"></span></label><label class="range-row">Battery mAh <input id="budget-battery" type="range" min="500" max="10000" step="100" value="2400"><span id="budget-battery-label"></span></label><label class="range-row">Sleep ratio % <input id="budget-sleep" type="range" min="10" max="95" value="75"><span id="budget-sleep-label"></span></label><button class="btn-primary mt-16" onclick="calculateEdgeBudget()">Calculate</button></div><div class="lab-panel"><h3>Budget Output</h3><div id="budget-results" class="metric-grid"></div></div></div></div></section>`), quizPage);
+  main.insertBefore(htmlToElement(`<section class="page" id="ch16"><div class="chapter-hero ch3-hero"><div class="chapter-number">16</div><h1>Fleet Operations Simulator</h1><p class="chapter-tagline">Practice canary rollout and rollback decisions for a live IoT fleet.</p></div><div class="chapter-body"><div class="lab-grid"><div class="lab-panel"><h3>Rollout Inputs</h3><label class="range-row">Fleet size <input id="fleet-size" type="range" min="100" max="10000" step="100" value="2500"><span id="fleet-size-label"></span></label><label class="range-row">Canary percent <input id="fleet-canary" type="range" min="1" max="50" value="10"><span id="fleet-canary-label"></span></label><label class="range-row">Offline percent <input id="fleet-offline" type="range" min="0" max="40" value="8"><span id="fleet-offline-label"></span></label><label class="range-row">Rollback threshold <input id="fleet-rollback" type="range" min="1" max="15" value="5"><span id="fleet-rollback-label"></span></label><button class="btn-primary mt-16" onclick="simulateFleet()">Simulate Rollout</button></div><div class="lab-panel"><h3>Operations Result</h3><div id="fleet-results" class="metric-grid"></div></div></div></div></section>`), quizPage);
+  initAdvancedLabEvents();
+}
+
+function htmlToElement(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html.trim();
+  return template.content.firstElementChild;
+}
+
+function initAdvancedLabEvents() {
+  [
+    ['iot-range', 'iot-range-label', ['local', 'room', 'building', 'campus', 'regional']],
+    ['iot-battery', 'iot-battery-label', ['low', 'medium-low', 'medium', 'high', 'critical']],
+    ['iot-frequency', 'iot-frequency-label', ['hourly', '15 min', '1 min', '10 sec', 'real-time']],
+    ['iot-payload', 'iot-payload-label', ['tiny', 'small', 'medium', 'large', 'bulk']],
+  ].forEach(([inputId, labelId, labels]) => bindRangeLabel(inputId, labelId, value => labels[value - 1]));
+  [
+    ['budget-samples', 'budget-samples-label', v => `${v}/min`],
+    ['budget-payload', 'budget-payload-label', v => `${v} B`],
+    ['budget-battery', 'budget-battery-label', v => `${v} mAh`],
+    ['budget-sleep', 'budget-sleep-label', v => `${v}%`],
+    ['fleet-size', 'fleet-size-label', v => Number(v).toLocaleString()],
+    ['fleet-canary', 'fleet-canary-label', v => `${v}%`],
+    ['fleet-offline', 'fleet-offline-label', v => `${v}%`],
+    ['fleet-rollback', 'fleet-rollback-label', v => `${v}%`],
+  ].forEach(([inputId, labelId, fmt]) => bindRangeLabel(inputId, labelId, fmt));
+  scoreProtocols();
+  buildThreatModel();
+  calculateEdgeBudget();
+  simulateFleet();
+}
+
+function bindRangeLabel(inputId, labelId, format) {
+  const input = document.getElementById(inputId);
+  const label = document.getElementById(labelId);
+  if (!input || !label) return;
+  const update = () => { label.textContent = format(Number(input.value)); };
+  input.addEventListener('input', update);
+  update();
+}
+
+function scoreProtocols() {
+  const range = Number(document.getElementById('iot-range')?.value || 3);
+  const battery = Number(document.getElementById('iot-battery')?.value || 3);
+  const frequency = Number(document.getElementById('iot-frequency')?.value || 3);
+  const payload = Number(document.getElementById('iot-payload')?.value || 3);
+  const protocols = [
+    { name:'MQTT', range:3, battery:3, frequency:5, payload:4, note:'Use for reliable telemetry into cloud services.' },
+    { name:'CoAP', range:3, battery:4, frequency:3, payload:2, note:'Good request/response choice for constrained devices.' },
+    { name:'LoRaWAN', range:5, battery:5, frequency:1, payload:1, note:'Best for sparse long-range readings.' },
+    { name:'BLE', range:1, battery:5, frequency:3, payload:2, note:'Strong for nearby wearables, beacons, and gateways.' },
+    { name:'Zigbee', range:2, battery:4, frequency:3, payload:2, note:'Mesh-friendly for building automation.' },
+    { name:'NB-IoT', range:5, battery:4, frequency:2, payload:2, note:'Cellular LPWAN for managed wide-area deployments.' },
+    { name:'HTTP', range:3, battery:1, frequency:2, payload:5, note:'Simple integration, heavier device overhead.' },
+  ].map(p => ({ ...p, score: 100 - (Math.abs(p.range - range) + Math.abs(p.battery - battery) + Math.abs(p.frequency - frequency) + Math.abs(p.payload - payload)) * 9 })).sort((a, b) => b.score - a.score);
+  document.getElementById('protocol-results').innerHTML = protocols.map(p => `<div class="rank-item"><strong>${p.name}</strong><span>${Math.max(0, p.score)}%</span><p>${p.note}</p></div>`).join('');
+}
+
+function buildThreatModel() {
+  const selected = [...document.querySelectorAll('.threat-input:checked')].map(i => i.value);
+  const controls = {
+    device:['Unique device identity', 'Secure boot', 'No hardcoded credentials', 'Signed firmware'],
+    gateway:['Firewall local services', 'Rate-limit device traffic', 'Broker authentication', 'Segment gateway network'],
+    cloud:['mTLS or signed tokens', 'Least-privilege APIs', 'Audit logs', 'Tenant isolation'],
+    ota:['Staged rollouts', 'Rollback slot', 'Firmware signing', 'Update provenance checks'],
+    privacy:['Data minimization', 'Retention policy', 'Encrypted storage', 'Consent and export workflow'],
+  };
+  document.getElementById('threat-results').innerHTML = selected.flatMap(key => controls[key]).map(item => `<label class="check-row"><input type="checkbox"> ${item}</label>`).join('');
+}
+
+function calculateEdgeBudget() {
+  const samples = Number(document.getElementById('budget-samples')?.value || 12);
+  const payload = Number(document.getElementById('budget-payload')?.value || 128);
+  const battery = Number(document.getElementById('budget-battery')?.value || 2400);
+  const sleep = Number(document.getElementById('budget-sleep')?.value || 75);
+  const dailyKb = samples * 60 * 24 * payload / 1024;
+  const avgMa = 38 * ((100 - sleep) / 100) + 0.08 * (sleep / 100);
+  const days = battery / avgMa / 24;
+  const recommendation = dailyKb > 10240 ? 'Add edge aggregation before cloud upload.' : days < 30 ? 'Increase sleep ratio or reduce sampling.' : 'Budget is workable for a pilot.';
+  document.getElementById('budget-results').innerHTML = `<div class="metric"><span>${dailyKb.toFixed(1)} KB</span><small>Daily uplink</small></div><div class="metric"><span>${avgMa.toFixed(2)} mA</span><small>Average draw</small></div><div class="metric"><span>${days.toFixed(1)} days</span><small>Battery estimate</small></div><div class="metric wide"><span>${recommendation}</span><small>Engineering call</small></div>`;
+}
+
+function simulateFleet() {
+  const size = Number(document.getElementById('fleet-size')?.value || 2500);
+  const canary = Number(document.getElementById('fleet-canary')?.value || 10);
+  const offline = Number(document.getElementById('fleet-offline')?.value || 8);
+  const rollback = Number(document.getElementById('fleet-rollback')?.value || 5);
+  const failureRate = Math.max(1, Math.round((offline * 0.18) + (canary > 25 ? 4 : 1)));
+  const decision = failureRate >= rollback ? 'Pause rollout and investigate telemetry.' : 'Continue staged rollout to next cohort.';
+  document.getElementById('fleet-results').innerHTML = `<div class="metric"><span>${Math.round(size * canary / 100).toLocaleString()}</span><small>Canary devices</small></div><div class="metric"><span>${Math.round(size * offline / 100).toLocaleString()}</span><small>Offline devices</small></div><div class="metric"><span>${failureRate}%</span><small>Predicted failures</small></div><div class="metric wide"><span>${decision}</span><small>Release decision</small></div>`;
+}
+
 // ── INIT ──────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  injectAdvancedLabs();
+
   // Sidebar overlay
   const overlay = document.createElement('div');
   overlay.id = 'sidebar-overlay';
